@@ -1,5 +1,9 @@
-include .envrc
-MIGRATIONS_PATH = ./cmd/migrate/migrations
+create: 
+	echo  "MIGRATIONS_PATH = ./cmd/migrate/migrations" > .envrc
+
+docker:
+	docker compose build 
+	docker compose up
 
 .PHONY: test
 test:
