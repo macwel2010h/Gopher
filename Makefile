@@ -5,6 +5,9 @@ docker:
 	docker compose build 
 	docker compose up
 
+destroy:
+	docker compose down
+
 .PHONY: test
 test:
 	@go test -v ./...
