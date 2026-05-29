@@ -2,8 +2,11 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:16.3
-    container_name: Gopher-postgres-db
+    image: gopher-postgres-db-image
+    build:
+      context: .
+      dockerfile_inline: FROM postgres:16.3
+    container_name: gopher-postgres-db-container
     environment:
       POSTGRES_DB: socialnetwork
       POSTGRES_USER: admin
@@ -16,17 +19,25 @@ services:
       - "5432:5432"
 
   redis:
-    image: redis:6.2-alpine
+    image: gopher-redis-image
+    build:
+      context: .
+      dockerfile_inline: FROM redis:6.2-alpine
     restart: unless-stopped
-    container_name: Gopher-redis
+    container_name: gopher-redis-container
     ports:
       - "6379:6379"
     command: redis-server --save 60 1 --loglevel warning
 
   redis-commander:
-    container_name: Gopher-redis-commander
+    image: gopher-redis-commander-image
+    build:
+      context: .
+      dockerfile_inline: FROM rediscommander/redis-commander:latest
+    
+    container_name: gopher-redis-commander-container
     hostname: redis-commander
-    image: rediscommander/redis-commander:latest
+    
     environment:
     - REDIS_HOST=redis
     ports:

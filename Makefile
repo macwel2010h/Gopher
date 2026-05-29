@@ -7,6 +7,7 @@ start:
 
 destroy:
 	@docker compose down
+	@docker rmi gopher-postgres-db-image gopher-redis-image gopher-redis-commander-image
 
 .PHONY: test
 test:
