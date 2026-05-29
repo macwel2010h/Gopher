@@ -1,12 +1,12 @@
 create: 
-	echo  "MIGRATIONS_PATH = ./cmd/migrate/migrations" > .envrc
+	@echo  "MIGRATIONS_PATH = ./cmd/migrate/migrations" > .envrc
 
-docker:
-	docker compose build 
-	docker compose up
+start:
+	@docker compose build 
+	@docker compose up
 
 destroy:
-	docker compose down
+	@docker compose down
 
 .PHONY: test
 test:
